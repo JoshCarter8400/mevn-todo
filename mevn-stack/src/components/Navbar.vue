@@ -1,14 +1,14 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top custom-bg-dark">
+      <router-link to="/" class="navbar-brand">
+        <img
+          style="max-height: 25px"
+          alt="Vue logo"
+          src="../assets/logo.png"
+        />Task Manager
+      </router-link>
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><img
-            style="max-height: 25px"
-            alt="Vue logo"
-            src="../assets/logo.png"
-          />Task Manager</a
-        >
         <button
           class="navbar-toggler"
           type="button"
@@ -23,22 +23,36 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <router-link to="/" class="nav-link">
+                Home
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tasks</a>
+              <router-link to="/tasks" class="nav-link">
+                Tasks
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <router-link to="/register" class="nav-link">
+                Register
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <router-link to="/login" class="nav-link">
+                Login
+              </router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Josh</a>
+              <a class="nav-link" href="#">
+                {{
+                  this.$store.state.username
+                    ? this.$store.state.username
+                    : 'User'
+                }}
+              </a>
             </li>
           </ul>
         </div>

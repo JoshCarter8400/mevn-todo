@@ -9,8 +9,8 @@
     <p>
       Click below to start organizing your day
     </p>
-    <p class="lead">
-      <a class="btn btn-success btn-lg" href="#" role="button">View tasks</a>
-    </p>
+    <router-link class="btn btn-success btn-lg" to="/tasks"
+      >View Tasks</router-link
+    >
   </div>
 </template>
