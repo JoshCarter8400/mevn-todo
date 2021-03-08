@@ -1,4 +1,4 @@
-import taskRoutes from './api/task/task-routes';
+import taskRoutes from './api/task/tasks-routes';
 import regRoutes from './api/register/register-routes';
 import userRoutes from './api/user/user-routes';
 import authRoutes from './api/auth/auth-routes';
