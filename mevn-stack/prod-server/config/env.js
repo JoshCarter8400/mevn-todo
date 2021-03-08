@@ -24,7 +24,7 @@ var _bodyParser2 = _interopRequireDefault(_bodyParser);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function setEnvironment(app) {
-  if (process.env.NODE_ENV != 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     setDevEnv(app);
   } else {
     setProdEnv(app);
@@ -32,13 +32,15 @@ function setEnvironment(app) {
 }
 
 function setDevEnv(app) {
-  console.log('setting dev environment');
+  process.env.NODE_ENV = 'development';
+  process.env.DB_URL = 'mongodb://localhost:27017/vue_task';
   app.use(_bodyParser2.default.json());
   app.use((0, _morgan2.default)('dev'));
   app.use((0, _cors2.default)());
 }
 function setProdEnv(app) {
+  process.env.NODE_ENV = 'production';
+  process.env.DB_URL = 'mongodb://localhost:27017/prod_vue_task';
   app.use(_bodyParser2.default.json());
-  app.use(_express2.default.static(__dirname + '../dist'));
-  console.log('setting prod environment');
+  app.use(_express2.default.static(__dirname + '/../dist'));
 }

@@ -6,10 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "set NODE_ENV=production && babel dev-server --out-dir prod-server && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "concurrently \"set NODE_ENV=development\"\"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\" ",
-    "temp": "set NODE_ENV=development && nodemon prod-server/index.js "
+    "dev": "concurrently \"set NODE_ENV=development\" \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\" "
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",

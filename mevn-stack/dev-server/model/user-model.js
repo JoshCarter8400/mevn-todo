@@ -15,6 +15,9 @@ userSchema.virtual('fullName').get(function() {
 
   return `${first} ${last}`;
 });
+userSchema.statics.passwordMatches = function(password, hash) {
+  return bcrypt.compareSync(password, hash);
+};
 
 userSchema.pre('save', function(next) {
   this.username = this.username.toLowerCase();
@@ -25,4 +28,4 @@ userSchema.pre('save', function(next) {
   next();
 });
 
-export default mongoose.model('user', true);
+export default mongoose.model('user', userSchema);
