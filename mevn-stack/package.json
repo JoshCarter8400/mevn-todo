@@ -13,6 +13,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
@@ -20,7 +21,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.11.19",
     "popper.js": "^1.16.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },

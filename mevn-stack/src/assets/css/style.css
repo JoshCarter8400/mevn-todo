@@ -80,3 +80,12 @@ form.custom-form {
   margin-left: auto;
   margin-right: auto;
 }
+
+.modal-title,
+.modal-body {
+  color: #000 !important;
+}
+
+.is-late {
+  color: #dc3545;
+}

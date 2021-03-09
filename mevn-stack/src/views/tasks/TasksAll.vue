@@ -1,3 +1,137 @@
 <template>
-  <h1>Tasks All Route</h1>
+  <div class="d-flex flex-column">
+    <h1>Tasks</h1>
+    <div class="mb-4">
+      <router-link to="/tasks/new" class="btn btn-success ml-2" exact
+        >Create Task</router-link
+      >
+    </div>
+    <div>
+      <div
+        v-if="tasks && tasks.length > 0"
+        class="d-flex flex-wrap justify-content-start"
+      >
+        <b-card
+          v-for="task in tasks"
+          v-bind:key="task._id"
+          title="Card Title"
+          tag="article"
+          style="max-width: 18rem;"
+          class="mb-2 ml-2 text-white bg-dark"
+        >
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">{{ task.title }}</h5>
+            <span>{{ task.dueDate }}</span>
+          </div>
+
+          <h6 class="card-subtitle mb-2 text-muted">
+            Created by {{ task.author.username }}
+          </h6>
+          <b-card-text>
+            {{ task.body }}
+          </b-card-text>
+
+          <div
+            v-if="task.author._id === $store.state.userId"
+            class="form-group form-check"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              :disabled="task.completed"
+              v-model="task.completed"
+              v-on:click="markAsCompleted(task)"
+            />
+            <label for="form-check-label">Completed</label>
+          </div>
+          <div
+            v-if="task.author._id === $store.state.userId"
+            class="d-flex justify-content-between"
+          >
+            <router-link
+              type="button"
+              tag="button"
+              class="card-link btn btn-primary"
+              >Edit</router-link
+            >
+            <a
+              v-on:click.prevent="currentTaskId = task._id"
+              class="card-link btn btn-danger"
+              href="#"
+              v-b-modal1
+              >Delete</a
+            >
+          </div>
+        </b-card>
+      </div>
+    </div>
+    <div>
+      <b-modal id="modal1" ref="modal" centered title="Delete Confirmation">
+        <p class="my-4">Are you sure you would like to delete this task?</p>
+
+        <div slot="modal-footer" class="w-100 text-right">
+          <b-button
+            slot="md"
+            class="mr-1"
+            variant="danger"
+            block
+            @click="deleteTask"
+            >Delete</b-button
+          >
+          <b-button slot="md" variant="secondary" @click="cancelModal"
+            >Cancel</b-button
+          >
+        </div>
+      </b-modal>
+    </div>
+    <div v-if="tasks && tasks.length === 0" class="ml-2">
+      <div class="alert alert-info">No tasks found</div>
+    </div>
+  </div>
 </template>
+
+<script>
+import * as taskService from '../../services/TaskService';
+import moment from 'moment';
+export default {
+  name: 'tasks-all',
+  data: function() {
+    return {
+      tasks: null,
+      currentTaskId: null,
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    taskService.getAllTasks().then((res) => {
+      next((vm) => {
+        vm.tasks = res.data.tasks;
+      });
+    });
+  },
+  methods: {
+    taskIsLate: function(date) {
+      return moment(date).isBefore();
+    },
+    cancelModal: function() {
+      this.$refs.modal.hide();
+      this.currentTaskId = null;
+    },
+    deleteTask: async function() {
+      this.$refs.modal.hide();
+      await taskService.deleteTask(this.currentTaskId);
+      const index = this.tasks.findIndex(
+        (task) => task._id === this.currentTaskId
+      );
+      this.tasks.splice(index, 1);
+      this.currentTaskId = null;
+    },
+    markAsCompleted: function(task) {
+      task.completed = true;
+      const request = {
+        task: task,
+      };
+      taskService.updateTask(request);
+    },
+  },
+};
+</script>
