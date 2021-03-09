@@ -72,7 +72,7 @@ export default {
       const registerPromise = auth.registerUser(user);
       const loginPromise = auth.login(user);
       await Promise.all([registerPromise, loginPromise]);
-      this.$router.push({ name: 'home' });
+      this.$router.push({ name: 'Home' });
     },
   },
 };

@@ -1,5 +1,6 @@
 import { StringUtil } from '../../utilities/string-util';
 import User from '../../model/user-model';
+import { generateJWT } from '../../services/auth-service';
 export function index(req, res) {
   const validation = validateIndex(req.body);
   if (!validation.isValid) {
@@ -14,16 +15,16 @@ export function index(req, res) {
       return res.status(401).json();
     }
 
-    const passwordsMatch = User.passwordsMatch(
+    const passwordsMatch = User.passwordMatches(
       req.body.password,
       user.password
     );
     if (!passwordsMatch) {
       return res.status(401).json();
     }
+    const token = generateJWT(user);
+    return res.status(200).json({ token: token });
   });
-
-  return res.status(200).json();
 }
 
 function validateIndex(body) {

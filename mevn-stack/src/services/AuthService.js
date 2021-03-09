@@ -11,17 +11,23 @@ export function login(user) {
     .post('/auth', user)
     .then((res) => {
       if (res) {
-        const fakeToken = {
-          token: 'my-token',
-        };
-        setToken(fakeToken);
+        setToken(res.data.token);
       }
     });
 }
 
-function setToken(token) {
-  localStorage.setItem('token', JSON.stringify(token));
+export function logout() {
+  localStorage.clear();
   store.dispatch('authenticate');
+}
+
+function setToken(token) {
+  localStorage.setItem('token', token);
+  store.dispatch('authenticate');
+}
+
+export function setToken() {
+  return localStorage.getItem('token');
 }
 
 export function getUserName() {
