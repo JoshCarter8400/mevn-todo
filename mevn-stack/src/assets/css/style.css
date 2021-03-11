@@ -82,10 +82,10 @@ form.custom-form {
 }
 
 .modal-title,
-.modal-body {
+.modal-body p {
   color: #000 !important;
 }
 
-.is-late {
+.late {
   color: #dc3545;
 }

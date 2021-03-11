@@ -41,7 +41,7 @@ function index(req, res) {
 function create(req, res) {
   // Create task
   var id = auth.getUserId(req);
-  _userModel2.default.findOne({ _id: id, id: id }, function (error, user) {
+  _userModel2.default.findOne({ _id: id }, function (error, user) {
     if (error && !user) {
       return res.status(500).json();
     }
@@ -102,7 +102,7 @@ function remove(req, res) {
 }
 function show(req, res) {
   // Get task by id
-  _taskModel2.default.findOne({ _id: req.params.id }, function (error, tasks) {
+  _taskModel2.default.findOne({ _id: req.params.id }, function (error, task) {
     if (error) {
       return res.status(500).json();
     }

@@ -24,5 +24,5 @@ function setProdEnv(app) {
   process.env.DB_URL = 'mongodb://localhost:27017/prod_vue_task';
   process.env.TOKEN_SECRET = 'vue-udemy-learning-prod';
   app.use(bodyParser.json());
-  app.use(express.static(__dirname + '/../dist'));
+  app.use(express.static(__dirname + '/../../dist'));
 }

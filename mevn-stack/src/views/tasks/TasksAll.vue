@@ -14,14 +14,19 @@
         <b-card
           v-for="task in tasks"
           v-bind:key="task._id"
-          title="Card Title"
           tag="article"
           style="max-width: 18rem;"
           class="mb-2 ml-2 text-white bg-dark"
         >
           <div class="d-flex justify-content-between">
             <h5 class="card-title">{{ task.title }}</h5>
-            <span>{{ task.dueDate }}</span>
+            <span
+              v-bind:class="{
+                late: taskIsLate(task.dueDate) && !task.completed,
+              }"
+              class="small"
+              >{{ task.dueDate | date }}</span
+            >
           </div>
 
           <h6 class="card-subtitle mb-2 text-muted">
@@ -52,13 +57,15 @@
               type="button"
               tag="button"
               class="card-link btn btn-primary"
+              :to="{ name: 'tasks-edit', params: { id: task._id } }"
+              exact
               >Edit</router-link
             >
             <a
               v-on:click.prevent="currentTaskId = task._id"
               class="card-link btn btn-danger"
               href="#"
-              v-b-modal1
+              v-b-modal.modal1
               >Delete</a
             >
           </div>

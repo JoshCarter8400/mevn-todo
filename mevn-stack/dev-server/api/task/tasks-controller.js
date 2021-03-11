@@ -15,7 +15,7 @@ export function index(req, res) {
 export function create(req, res) {
   // Create task
   const id = auth.getUserId(req);
-  User.findOne({ _id: id, id }, (error, user) => {
+  User.findOne({ _id: id }, (error, user) => {
     if (error && !user) {
       return res.status(500).json();
     }
@@ -78,7 +78,7 @@ export function remove(req, res) {
 }
 export function show(req, res) {
   // Get task by id
-  Task.findOne({ _id: req.params.id }, (error, tasks) => {
+  Task.findOne({ _id: req.params.id }, (error, task) => {
     if (error) {
       return res.status(500).json();
     }
