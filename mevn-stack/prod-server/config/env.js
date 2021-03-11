@@ -41,7 +41,7 @@ function setDevEnv(app) {
 }
 function setProdEnv(app) {
   process.env.NODE_ENV = 'production';
-  process.env.DB_URL = 'mongodb+srv://joshcarter8400:Michael2304@)@cluster0.mdf7b.mongodb.net/vue_task_prod?retryWrites=true&w=majority';
+  process.env.DB_URL = 'mongodb://localhost:27017/prod_vue_task';
   process.env.TOKEN_SECRET = 'vue-udemy-learning-prod';
   app.use(_bodyParser2.default.json());
   app.use(_express2.default.static(__dirname + '/../../dist'));
